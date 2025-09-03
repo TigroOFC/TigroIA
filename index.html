@@ -174,7 +174,6 @@ async function enviar() {
     const data = await respostaAPI.json();
     adicionarMensagem(`TigroIA: ${data.resposta}`, "bot");
   } catch {
-    // Simulando várias mensagens de erro
     const erros = [
       "Erro: sem resposta da IA.",
       "Erro: falha na conexão.",
