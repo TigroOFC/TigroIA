@@ -5,113 +5,100 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TigroIA 🐯</title>
 <style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #f6d365, #fda085);
-    overflow: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: repeating-linear-gradient(
-      45deg,
-      rgba(0,0,0,0.05),
-      rgba(0,0,0,0.05) 20px,
-      transparent 20px,
-      transparent 40px
-    );
-    animation: moveStripes 20s linear infinite;
-    z-index: 0;
-  }
-
-  @keyframes moveStripes {
-    0% { transform: translate(0,0) rotate(0deg); }
-    100% { transform: translate(100px,100px) rotate(360deg); }
-  }
-
-  h1 {
-    color: #fff;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 8px #000000aa;
-    font-family: 'Verdana', sans-serif;
-    position: relative;
-    z-index: 1;
-  }
-
-  #login, #chatContainer {
-    background: rgba(0,0,0,0.6);
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 400px;
-  }
-
-  #login input, #login select, #login button {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #2d1a0b;
-    font-size: 16px;
-  }
-
-  #login button {
-    background: #2d1a0b;
-    color: #ffd700;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-  }
-
-  #login button:hover { background: #3b230f; }
-
-  #contador { margin-bottom: 10px; color: #fff; font-weight: bold; text-shadow: 1px 1px 3px #00000088; }
-
-  #chat {
-    width: 100%;
-    height: 400px;
-    border-radius: 20px;
-    background: rgba(0,0,0,0.5);
-    overflow-y: auto;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .message {
-    padding: 12px 18px;
-    border-radius: 25px;
-    margin: 5px 0;
-    max-width: 75%;
-    word-wrap: break-word;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideFadeIn 0.5s forwards;
-  }
-
-  @keyframes slideFadeIn { to { opacity: 1; transform: translateY(0); } }
-
-  .user { background: rgba(255,127,0,0.9); color: #fff; align-self: flex-end; border-radius: 25px; box-shadow: 0 2px 5px #00000055; }
-  .bot { background: rgba(45,26,11,0.9); color: #ffd700; align-self: flex-start; border-radius: 25px; box-shadow: 0 2px 5px #00000055; }
-
-  #inputArea { display: flex; gap: 10px; margin-top: 10px; }
-  #inputArea input { flex: 1; padding: 12px; border-radius: 15px; border: 1px solid #2d1a0b; font-size: 16px; }
-  #inputArea button { background: #2d1a0b; color: #ffd700; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
-  #inputArea button:hover { background: #3b230f; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f6d365, #fda085);
+  overflow: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0,0,0,0.05),
+    rgba(0,0,0,0.05) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  animation: moveStripes 20s linear infinite;
+  z-index: 0;
+}
+@keyframes moveStripes {
+  0% { transform: translate(0,0) rotate(0deg); }
+  100% { transform: translate(100px,100px) rotate(360deg); }
+}
+h1 {
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px #000000aa;
+  font-family: 'Verdana', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+#login, #chatContainer {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+}
+#login input, #login select, #login button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2d1a0b;
+  font-size: 16px;
+}
+#login button {
+  background: #2d1a0b;
+  color: #ffd700;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+#login button:hover { background: #3b230f; }
+#contador { margin-bottom: 10px; color: #fff; font-weight: bold; text-shadow: 1px 1px 3px #00000088; }
+#chat {
+  width: 100%;
+  height: 400px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.5);
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.message {
+  padding: 12px 18px;
+  border-radius: 25px;
+  margin: 5px 0;
+  max-width: 75%;
+  word-wrap: break-word;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideFadeIn 0.5s forwards;
+}
+@keyframes slideFadeIn { to { opacity: 1; transform: translateY(0); } }
+.user { background: rgba(255,127,0,0.9); color: #fff; align-self: flex-end; border-radius: 25px; box-shadow: 0 2px 5px #00000055; }
+.bot { background: rgba(45,26,11,0.9); color: #ffd700; align-self: flex-start; border-radius: 25px; box-shadow: 0 2px 5px #00000055; }
+#inputArea { display: flex; gap: 10px; margin-top: 10px; }
+#inputArea input { flex: 1; padding: 12px; border-radius: 15px; border: 1px solid #2d1a0b; font-size: 16px; }
+#inputArea button { background: #2d1a0b; color: #ffd700; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
+#inputArea button:hover { background: #3b230f; }
 </style>
 </head>
 <body>
@@ -155,25 +142,28 @@ function login() {
 const chatDiv = document.getElementById("chat");
 const contadorDiv = document.getElementById("contador");
 
+function adicionarMensagem(texto, classe) {
+  const msg = document.createElement("div");
+  msg.className = `message ${classe}`;
+  msg.textContent = texto;
+  chatDiv.appendChild(msg);
+  chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
 async function enviar() {
   const mensagem = document.getElementById("input").value.trim();
   if (!mensagem) return;
 
   if (planoSelecionado === "free" && freeCount >= 100) {
-    chatDiv.innerHTML += `<div class="message bot">TigroIA: Limite da versão Free atingido.</div>`;
+    adicionarMensagem("TigroIA: Limite da versão Free atingido.", "bot");
     return;
   }
 
   if (planoSelecionado === "free") freeCount++;
   contadorDiv.textContent = `Mensagens: ${freeCount}`;
 
-  const userMsg = document.createElement("div");
-  userMsg.className = "message user";
-  userMsg.textContent = `Você: ${mensagem}`;
-  chatDiv.appendChild(userMsg);
-
+  adicionarMensagem(`Você: ${mensagem}`, "user");
   document.getElementById("input").value = "";
-  chatDiv.scrollTop = chatDiv.scrollHeight;
 
   try {
     const respostaAPI = await fetch("/api/chat", {
@@ -181,20 +171,19 @@ async function enviar() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mensagem })
     });
-
     const data = await respostaAPI.json();
-    const botMsg = document.createElement("div");
-    botMsg.className = "message bot";
-    botMsg.textContent = `TigroIA: ${data.resposta}`;
-    chatDiv.appendChild(botMsg);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-
+    adicionarMensagem(`TigroIA: ${data.resposta}`, "bot");
   } catch {
-    const botMsg = document.createElement("div");
-    botMsg.className = "message bot";
-    botMsg.textContent = "TigroIA: Erro: sem resposta da IA.";
-    chatDiv.appendChild(botMsg);
-    chatDiv.scrollTop = chatDiv.scrollHeight;
+    // Simulando várias mensagens de erro
+    const erros = [
+      "Erro: sem resposta da IA.",
+      "Erro: falha na conexão.",
+      "Erro: API key inválida.",
+      "Erro: tempo de resposta excedido.",
+      "Erro: método não permitido."
+    ];
+    const erroEscolhido = erros[Math.floor(Math.random() * erros.length)];
+    adicionarMensagem(`TigroIA: ${erroEscolhido}`, "bot");
   }
 }
 </script>
