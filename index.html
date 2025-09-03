@@ -81,6 +81,7 @@ h1 {
   padding: 15px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .message {
   padding: 12px 18px;
@@ -99,6 +100,21 @@ h1 {
 #inputArea input { flex: 1; padding: 12px; border-radius: 15px; border: 1px solid #2d1a0b; font-size: 16px; }
 #inputArea button { background: #2d1a0b; color: #ffd700; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
 #inputArea button:hover { background: #3b230f; }
+
+/* Balões animados */
+.balao {
+  position: absolute;
+  bottom: -50px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 215, 0, 0.6);
+  border-radius: 50%;
+  animation: subir 7s linear infinite;
+}
+@keyframes subir {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  100% { transform: translateY(-600px) scale(0.5); opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -132,12 +148,20 @@ function login() {
   const email = document.getElementById("email").value.trim();
   const senha = document.getElementById("senha").value.trim();
   planoSelecionado = document.getElementById("plano").value;
-
   if (!email || !senha) { alert("Preencha todos os campos!"); return; }
-
   document.getElementById("login").style.display = "none";
   document.getElementById("chatContainer").style.display = "block";
 }
+
+// Cria balões animados
+function criarBalao() {
+  const balao = document.createElement("div");
+  balao.className = "balao";
+  balao.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(balao);
+  setTimeout(() => balao.remove(), 7000);
+}
+setInterval(criarBalao, 800);
 
 const chatDiv = document.getElementById("chat");
 const contadorDiv = document.getElementById("contador");
@@ -158,7 +182,6 @@ async function enviar() {
     adicionarMensagem("TigroIA: Limite da versão Free atingido.", "bot");
     return;
   }
-
   if (planoSelecionado === "free") freeCount++;
   contadorDiv.textContent = `Mensagens: ${freeCount}`;
 
