@@ -6,7 +6,6 @@ export default async function handler(req, res) {
   }
 
   const { mensagem } = req.body;
-
   if (!mensagem) {
     return res.status(400).json({ resposta: "Erro: mensagem vazia." });
   }
