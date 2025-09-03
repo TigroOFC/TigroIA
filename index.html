@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TigroIA 🐯</title>
 <style>
-  /* Fundo animado tipo tigre */
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -18,7 +17,6 @@
     overflow: hidden;
   }
 
-  /* Fundo com listras animadas */
   body::before {
     content: '';
     position: fixed;
@@ -42,7 +40,6 @@
     100% { transform: translate(100px,100px) rotate(360deg); }
   }
 
-  /* Títulos */
   h1 {
     color: #fff;
     margin-bottom: 20px;
@@ -52,7 +49,6 @@
     z-index: 1;
   }
 
-  /* Login */
   #login, #chatContainer {
     background: rgba(0,0,0,0.6);
     padding: 20px;
@@ -83,13 +79,7 @@
 
   #login button:hover { background: #3b230f; }
 
-  /* Chat */
-  #contador {
-    margin-bottom: 10px;
-    color: #fff;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px #00000088;
-  }
+  #contador { margin-bottom: 10px; color: #fff; font-weight: bold; text-shadow: 1px 1px 3px #00000088; }
 
   #chat {
     width: 100%;
@@ -113,64 +103,21 @@
     animation: slideFadeIn 0.5s forwards;
   }
 
-  @keyframes slideFadeIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes slideFadeIn { to { opacity: 1; transform: translateY(0); } }
 
-  .user {
-    background: rgba(255,127,0,0.9);
-    color: #fff;
-    align-self: flex-end;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 25px;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    box-shadow: 0 2px 5px #00000055;
-  }
+  .user { background: rgba(255,127,0,0.9); color: #fff; align-self: flex-end; border-radius: 25px; box-shadow: 0 2px 5px #00000055; }
+  .bot { background: rgba(45,26,11,0.9); color: #ffd700; align-self: flex-start; border-radius: 25px; box-shadow: 0 2px 5px #00000055; }
 
-  .bot {
-    background: rgba(45,26,11,0.9);
-    color: #ffd700;
-    align-self: flex-start;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 25px;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    box-shadow: 0 2px 5px #00000055;
-  }
-
-  #inputArea {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  #inputArea input, #inputArea button {
-    padding: 12px;
-    border-radius: 15px;
-    border: 1px solid #2d1a0b;
-    font-size: 16px;
-  }
-
-  #inputArea input { flex: 1; }
-  #inputArea button {
-    background: #2d1a0b;
-    color: #ffd700;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-  }
-
+  #inputArea { display: flex; gap: 10px; margin-top: 10px; }
+  #inputArea input { flex: 1; padding: 12px; border-radius: 15px; border: 1px solid #2d1a0b; font-size: 16px; }
+  #inputArea button { background: #2d1a0b; color: #ffd700; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
   #inputArea button:hover { background: #3b230f; }
-
 </style>
 </head>
 <body>
 
 <h1>TigroIA 🐯</h1>
 
-<!-- LOGIN -->
 <div id="login">
   <input type="email" id="email" placeholder="Email">
   <input type="password" id="senha" placeholder="Senha">
@@ -181,7 +128,6 @@
   <button onclick="login()">Entrar</button>
 </div>
 
-<!-- CHAT -->
 <div id="chatContainer" style="display:none;">
   <div id="contador">Mensagens: 0</div>
   <div id="chat"></div>
@@ -200,12 +146,8 @@ function login() {
   const senha = document.getElementById("senha").value.trim();
   planoSelecionado = document.getElementById("plano").value;
 
-  if (!email || !senha) {
-    alert("Preencha todos os campos!");
-    return;
-  }
+  if (!email || !senha) { alert("Preencha todos os campos!"); return; }
 
-  // Aqui você poderia validar email/senha real
   document.getElementById("login").style.display = "none";
   document.getElementById("chatContainer").style.display = "block";
 }
@@ -237,7 +179,7 @@ async function enviar() {
     const respostaAPI = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ mensagem, plano: planoSelecionado })
+      body: JSON.stringify({ mensagem })
     });
 
     const data = await respostaAPI.json();

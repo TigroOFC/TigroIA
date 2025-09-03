@@ -1,8 +1,0 @@
-{
-  "name": "TigroIA",
-  "version": "1.0.0",
-  "main": "index.html",
-  "dependencies": {
-    "node-fetch": "^2.6.7"
-  }
-}
