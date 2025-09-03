@@ -3,68 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TigroIA</title>
+<title>TigroIA 🐯</title>
 <style>
+  /* Fundo animado tipo tigre */
   body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    overflow: hidden;
+  }
+
+  /* Fundo com listras animadas */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.05),
+      rgba(0,0,0,0.05) 20px,
+      transparent 20px,
+      transparent 40px
+    );
+    animation: moveStripes 20s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes moveStripes {
+    0% { transform: translate(0,0) rotate(0deg); }
+    100% { transform: translate(100px,100px) rotate(360deg); }
+  }
+
+  /* Títulos */
+  h1 {
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px #000000aa;
+    font-family: 'Verdana', sans-serif;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Login */
+  #login, #chatContainer {
+    background: rgba(0,0,0,0.6);
     padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
   }
-  h1 { color: #0a3d62; margin-bottom: 20px; }
-  #contador { margin-bottom: 10px; color: #2d3436; font-weight: bold; }
+
+  #login input, #login select, #login button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2d1a0b;
+    font-size: 16px;
+  }
+
+  #login button {
+    background: #2d1a0b;
+    color: #ffd700;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+
+  #login button:hover { background: #3b230f; }
+
+  /* Chat */
+  #contador {
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #00000088;
+  }
+
   #chat {
-    width: 100%; max-width: 600px; height: 400px;
-    border: 2px solid #0a3d62; border-radius: 10px; background: #fff;
-    overflow-y: auto; padding: 15px; margin-bottom: 10px;
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.5);
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
   }
-  .user { color: #0984e3; margin: 5px 0; }
-  .bot { color: #00b894; margin: 5px 0; }
-  #inputArea { display: flex; gap: 10px; width: 100%; max-width: 600px; }
-  select, input, button {
-    padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px;
+
+  .message {
+    padding: 12px 18px;
+    border-radius: 25px;
+    margin: 5px 0;
+    max-width: 75%;
+    word-wrap: break-word;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideFadeIn 0.5s forwards;
   }
-  input { flex: 1; }
-  button {
-    background: #0a3d62; color: white; border: none; cursor: pointer; transition: 0.2s;
+
+  @keyframes slideFadeIn {
+    to { opacity: 1; transform: translateY(0); }
   }
-  button:hover { background: #06547c; }
+
+  .user {
+    background: rgba(255,127,0,0.9);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    box-shadow: 0 2px 5px #00000055;
+  }
+
+  .bot {
+    background: rgba(45,26,11,0.9);
+    color: #ffd700;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    box-shadow: 0 2px 5px #00000055;
+  }
+
+  #inputArea {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  #inputArea input, #inputArea button {
+    padding: 12px;
+    border-radius: 15px;
+    border: 1px solid #2d1a0b;
+    font-size: 16px;
+  }
+
+  #inputArea input { flex: 1; }
+  #inputArea button {
+    background: #2d1a0b;
+    color: #ffd700;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+
+  #inputArea button:hover { background: #3b230f; }
+
 </style>
 </head>
 <body>
 
-<h1>TigroIA</h1>
-<div id="contador">Mensagens: 0</div>
-<div id="chat"></div>
-<div id="inputArea">
+<h1>TigroIA 🐯</h1>
+
+<!-- LOGIN -->
+<div id="login">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="senha" placeholder="Senha">
   <select id="plano">
     <option value="free">Free</option>
     <option value="pro">Pro</option>
   </select>
-  <input type="text" id="input" placeholder="Digite sua mensagem...">
-  <button onclick="enviar()">Enviar</button>
+  <button onclick="login()">Entrar</button>
+</div>
+
+<!-- CHAT -->
+<div id="chatContainer" style="display:none;">
+  <div id="contador">Mensagens: 0</div>
+  <div id="chat"></div>
+  <div id="inputArea">
+    <input type="text" id="input" placeholder="Digite sua mensagem...">
+    <button onclick="enviar()">Enviar</button>
+  </div>
 </div>
 
 <script>
+let planoSelecionado = "free";
+let freeCount = 0;
+
+function login() {
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+  planoSelecionado = document.getElementById("plano").value;
+
+  if (!email || !senha) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  // Aqui você poderia validar email/senha real
+  document.getElementById("login").style.display = "none";
+  document.getElementById("chatContainer").style.display = "block";
+}
+
 const chatDiv = document.getElementById("chat");
 const contadorDiv = document.getElementById("contador");
-let freeCount = 0;
 
 async function enviar() {
   const mensagem = document.getElementById("input").value.trim();
-  const plano = document.getElementById("plano").value;
   if (!mensagem) return;
 
-  if (plano === "free" && freeCount >= 100) {
-    chatDiv.innerHTML += `<p class="bot"><strong>TigroIA:</strong> Limite da versão Free atingido.</p>`;
+  if (planoSelecionado === "free" && freeCount >= 100) {
+    chatDiv.innerHTML += `<div class="message bot">TigroIA: Limite da versão Free atingido.</div>`;
     return;
   }
-  if (plano === "free") freeCount++;
+
+  if (planoSelecionado === "free") freeCount++;
   contadorDiv.textContent = `Mensagens: ${freeCount}`;
 
-  chatDiv.innerHTML += `<p class="user"><strong>Você:</strong> ${mensagem}</p>`;
+  const userMsg = document.createElement("div");
+  userMsg.className = "message user";
+  userMsg.textContent = `Você: ${mensagem}`;
+  chatDiv.appendChild(userMsg);
+
   document.getElementById("input").value = "";
   chatDiv.scrollTop = chatDiv.scrollHeight;
 
@@ -72,15 +237,21 @@ async function enviar() {
     const respostaAPI = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ mensagem, plano })
+      body: JSON.stringify({ mensagem, plano: planoSelecionado })
     });
 
     const data = await respostaAPI.json();
-    chatDiv.innerHTML += `<p class="bot"><strong>TigroIA:</strong> ${data.resposta}</p>`;
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+    botMsg.textContent = `TigroIA: ${data.resposta}`;
+    chatDiv.appendChild(botMsg);
     chatDiv.scrollTop = chatDiv.scrollHeight;
 
   } catch {
-    chatDiv.innerHTML += `<p class="bot"><strong>TigroIA:</strong> Erro: sem resposta da IA.</p>`;
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+    botMsg.textContent = "TigroIA: Erro: sem resposta da IA.";
+    chatDiv.appendChild(botMsg);
     chatDiv.scrollTop = chatDiv.scrollHeight;
   }
 }
