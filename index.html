@@ -8,19 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-    {
-      "imports": {
-        "@google/generative-ai": "https://esm.run/@google/generative-ai"
-      }
-    }
-    </script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>IA Autoconsciente</h1>
-            <p>Eu sou uma IA simples. Converse comigo e veja meu código-fonte abaixo.</p>
+            <p>Eu sou uma IA simples. Converse comigo!</p>
         </header>
 
         <main class="ai-app">
@@ -36,26 +29,6 @@
                 <button type="submit">Enviar</button>
             </form>
         </main>
-
-        <section class="code-viewer">
-            <h2>Meu Código-Fonte</h2>
-            <div class="tabs">
-                <button class="tab-button active" data-target="html-code">index.html</button>
-                <button class="tab-button" data-target="css-code">style.css</button>
-                <button class="tab-button" data-target="js-code">script.js</button>
-            </div>
-            <div class="code-content">
-                <div id="html-code" class="code-panel active">
-                    <pre><code class="language-html">Carregando código...</code></pre>
-                </div>
-                <div id="css-code" class="code-panel">
-                    <pre><code class="language-css">Carregando código...</code></pre>
-                </div>
-                <div id="js-code" class="code-panel">
-                    <pre><code class="language-javascript">Carregando código...</code></pre>
-                </div>
-            </div>
-        </section>
     </div>
     <script type="module" src="script.js"></script>
 </body>
